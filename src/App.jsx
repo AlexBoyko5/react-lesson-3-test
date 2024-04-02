@@ -4,32 +4,36 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import { Formik, Form } from 'formik';
 
-function App() {
-	const [count, setCount] = useState(0);
+const LoginForm = () => {
+	const handleSubmit = (evt) => {
+		evt.preventDefault();
+		const form = evt.target;
+		const { login, password } = form.elements;
+		console.log(login, password);
+		console.log(login.value, password.value);
+		form.reset();
+	};
 
 	return (
-		<>
-			<div>
-				<a href="https://vitejs.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
+		<form onSubmit={handleSubmit}>
+			<input type="text" name="login" />
+			<input type="password" name="password" />
+			<button type="submit">Login</button>
+		</form>
+	);
+};
+
+function App() {
+	return (
+		<div className="App">
+			<header className="App-header">
+				<img src={reactLogo} className="App-logo" alt="logo" />
 				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
+					Edit <code>App.jsx</code> and save to reload.
 				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-		</>
+				<LoginForm />
+			</header>
+		</div>
 	);
 }
 
